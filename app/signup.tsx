@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { useNavigation, NavigationProp } from '@react-navigation/native';
 import { auth } from '../firebaseConfig'; 
+import { RootStackParamList } from './types';
 
-export default function Signup({ navigation }: any) {
+export default function Signup({  }: any) {
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -17,7 +20,7 @@ export default function Signup({ navigation }: any) {
     try {
       await createUserWithEmailAndPassword(auth, email, password);
       Alert.alert('Success', 'Account created successfully!');
-      navigation.navigate('Login'); 
+      navigation.navigate('login'); 
     } catch (error: any) {
       Alert.alert('Error', error.message);
     }

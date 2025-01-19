@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { signInWithEmailAndPassword } from 'firebase/auth';
+import { useNavigation, NavigationProp } from '@react-navigation/native';
 import { auth } from '../firebaseConfig'; 
+import { RootStackParamList } from './types';
 
-export default function Login({ navigation }: any) {
+
+export default function Login({  }: any) {
+      const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -11,7 +15,7 @@ export default function Login({ navigation }: any) {
     try {
       await signInWithEmailAndPassword(auth, email, password);
       Alert.alert('Success', 'Logged in successfully!');
-      navigation.navigate('Home'); 
+    //   navigation.navigate('Home'); 
     } catch (error: any) {
       Alert.alert('Error', error.message);
     }
@@ -37,7 +41,7 @@ export default function Login({ navigation }: any) {
       <TouchableOpacity style={styles.button} onPress={handleLogin}>
         <Text style={styles.buttonText}>Log In</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
+      <TouchableOpacity onPress={() => navigation.navigate('signup')}>
         <Text style={styles.link}>Don't have an account? Sign up</Text>
       </TouchableOpacity>
     </View>
