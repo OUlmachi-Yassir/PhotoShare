@@ -7,20 +7,22 @@ import { IconSymbol } from '@/components/ui/IconSymbol';
 import TabBarBackground from '@/components/ui/TabBarBackground';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
 
+  const greenColor = '#4CAF50'; 
+
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
+        tabBarActiveTintColor: greenColor,
         headerShown: false,
         tabBarButton: HapticTab,
         tabBarBackground: TabBarBackground,
         tabBarStyle: Platform.select({
           ios: {
-            // Use a transparent background on iOS to show the blur effect
             position: 'absolute',
           },
           default: {},
@@ -37,7 +39,7 @@ export default function TabLayout() {
         name="photos"
         options={{
           title: 'My Photos',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="photo.on.rectangle" color={color} />,
+          tabBarIcon: ({ color }) => <MaterialCommunityIcons name="image-auto-adjust" size={28} color={color} />, 
         }}
       />
       <Tabs.Screen
