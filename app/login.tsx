@@ -7,15 +7,16 @@ import { RootStackParamList } from './types';
 
 
 export default function Login({  }: any) {
-      const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  
 
   const handleLogin = async () => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
       Alert.alert('Success', 'Logged in successfully!');
-    //   navigation.navigate('Home'); 
+      navigation.navigate('(tabs)'); 
     } catch (error: any) {
       Alert.alert('Error', error.message);
     }
